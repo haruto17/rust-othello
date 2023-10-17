@@ -1,3 +1,5 @@
+use std::io;
+
 // o == white
 // x == black
 
@@ -24,13 +26,16 @@ fn main() {
     init_board(&mut board);
 
     loop {
+        let mut input = String::new();
         if turn % 2 != 0 {
             println!("Turn {}: o", turn);
             draw_board(&board);
+            io::stdin().read_line(&mut input).ok();
             turn += 1;
         } else {
             println!("Turn {}: x", turn);
             draw_board(&board);
+            io::stdin().read_line(&mut input).ok();
             turn += 1;
         }
 
