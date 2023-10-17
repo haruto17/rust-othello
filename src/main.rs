@@ -18,7 +18,7 @@ fn draw_board(board: &[[char; 8]; 8]) {
     }
 }
 
-fn check_put_stone(x: usize, y: usize) -> Result<(), ()> {
+fn check_can_put(x: usize, y: usize) -> Result<(), ()> {
     if x == 5 && y == 1 {
         Ok(())
     } else {
@@ -40,7 +40,7 @@ fn main() {
                 x: usize,
                 y: usize,
             }
-            match check_put_stone(x, y) {
+            match check_can_put(x, y) {
                 Ok(()) => turn += 1,
                 Err(()) => continue,
             }
@@ -51,7 +51,7 @@ fn main() {
                 x: usize,
                 y: usize,
             }
-            match check_put_stone(x, y) {
+            match check_can_put(x, y) {
                 Ok(()) => turn += 1,
                 Err(()) => continue,
             }
