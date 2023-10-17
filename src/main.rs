@@ -4,17 +4,20 @@ use proconio::input;
 
 const BOARD_HEIGHT: usize = 10;
 const BOARD_WIDTH: usize = 10;
+const WALL: char = '#';
+const WHITE: char = 'o';
+const BLACK: char = 'x';
 
 fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
-    board[4][4] = 'o';
-    board[4][5] = 'x';
-    board[5][4] = 'x';
-    board[5][5] = 'o';
+    board[4][4] = WHITE;
+    board[4][5] = BLACK;
+    board[5][4] = BLACK;
+    board[5][5] = WHITE;
     for i in 0..10 {
-        board[0][i] = '#';
-        board[i][0] = '#';
-        board[9][i] = '#';
-        board[i][9] = '#';
+        board[0][i] = WALL;
+        board[i][0] = WALL;
+        board[9][i] = WALL;
+        board[i][9] = WALL;
     }
 }
 
@@ -29,9 +32,9 @@ fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
 
 fn put_stone(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT], player: usize, x: usize, y: usize) {
     if player == 1 {
-        board[x][y] = 'x';
+        board[x][y] = BLACK;
     } else {
-        board[x][y] = 'o';
+        board[x][y] = WHITE;
     }
 }
 
@@ -47,7 +50,7 @@ fn main() {
 
     loop {
         if turn % 2 != 0 {
-            println!("Turn {}: x", turn);
+            println!("Turn {}: {BLACK}", turn);
             draw_board(&board);
             input! {
                 x: usize,
@@ -61,7 +64,7 @@ fn main() {
                 Err(()) => continue,
             }
         } else {
-            println!("Turn {}: o", turn);
+            println!("Turn {}: {WHITE}", turn);
             draw_board(&board);
             input! {
                 x: usize,
