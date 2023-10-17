@@ -1,5 +1,4 @@
-use std::io;
-
+use proconio::input;
 // o == white
 // x == black
 
@@ -19,8 +18,8 @@ fn draw_board(board: &[[char; 8]; 8]) {
     }
 }
 
-fn check_put_stone(input: String) -> Result<(), ()> {
-    if input == "h" {
+fn check_put_stone(x: usize, y: usize) -> Result<(), ()> {
+    if x == 5 && y == 1 {
         Ok(())
     } else {
         Err(())
@@ -34,24 +33,28 @@ fn main() {
     init_board(&mut board);
 
     loop {
-        let mut input = String::new();
         if turn % 2 != 0 {
             println!("Turn {}: o", turn);
             draw_board(&board);
-            io::stdin().read_line(&mut input).ok();
-            match check_put_stone(input) {
+            input! {
+                x: usize,
+                y: usize,
+            }
+            match check_put_stone(x, y) {
                 Ok(()) => turn += 1,
                 Err(()) => continue,
             }
         } else {
             println!("Turn {}: x", turn);
             draw_board(&board);
-            io::stdin().read_line(&mut input).ok();
-            match check_put_stone(input) {
+            input! {
+                x: usize,
+                y: usize,
+            }
+            match check_put_stone(x, y) {
                 Ok(()) => turn += 1,
                 Err(()) => continue,
             }
-            turn += 1;
         }
 
         println!();
