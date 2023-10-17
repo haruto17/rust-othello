@@ -18,12 +18,16 @@ fn draw_board(board: &[[char; 8]; 8]) {
     }
 }
 
-fn check_can_put(x: usize, y: usize) -> Result<(), ()> {
-    if x == 5 && y == 1 {
-        Ok(())
+fn put_stone(board: &mut [[char; 8]; 8], player: usize, x: usize, y: usize) {
+    if player == 1 {
+        board[x][y] = 'x';
     } else {
-        Err(())
+        board[x][y] = 'o';
     }
+}
+
+fn check_can_put(x: usize, y: usize) -> Result<(), ()> {
+    Ok(())
 }
 
 fn main() {
@@ -41,7 +45,10 @@ fn main() {
                 y: usize,
             }
             match check_can_put(x, y) {
-                Ok(()) => turn += 1,
+                Ok(()) => {
+                    put_stone(&mut board, 1, x, y);
+                    turn += 1;
+                }
                 Err(()) => continue,
             }
         } else {
@@ -52,7 +59,10 @@ fn main() {
                 y: usize,
             }
             match check_can_put(x, y) {
-                Ok(()) => turn += 1,
+                Ok(()) => {
+                    put_stone(&mut board, 2, x, y);
+                    turn += 1;
+                }
                 Err(()) => continue,
             }
         }
