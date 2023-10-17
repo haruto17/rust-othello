@@ -19,6 +19,14 @@ fn draw_board(board: &[[char; 8]; 8]) {
     }
 }
 
+fn check_put_stone(input: String) -> Result<(), ()> {
+    if input == "h" {
+        Ok(())
+    } else {
+        Err(())
+    }
+}
+
 fn main() {
     let mut turn = 1;
 
@@ -31,11 +39,18 @@ fn main() {
             println!("Turn {}: o", turn);
             draw_board(&board);
             io::stdin().read_line(&mut input).ok();
-            turn += 1;
+            match check_put_stone(input) {
+                Ok(()) => turn += 1,
+                Err(()) => continue,
+            }
         } else {
             println!("Turn {}: x", turn);
             draw_board(&board);
             io::stdin().read_line(&mut input).ok();
+            match check_put_stone(input) {
+                Ok(()) => turn += 1,
+                Err(()) => continue,
+            }
             turn += 1;
         }
 
