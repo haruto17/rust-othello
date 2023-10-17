@@ -38,7 +38,7 @@ fn main() {
 
     loop {
         if turn % 2 != 0 {
-            println!("Turn {}: o", turn);
+            println!("Turn {}: x", turn);
             draw_board(&board);
             input! {
                 x: usize,
@@ -52,7 +52,7 @@ fn main() {
                 Err(()) => continue,
             }
         } else {
-            println!("Turn {}: x", turn);
+            println!("Turn {}: o", turn);
             draw_board(&board);
             input! {
                 x: usize,
