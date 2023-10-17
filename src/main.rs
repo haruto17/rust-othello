@@ -6,10 +6,16 @@ const BOARD_HEIGHT: usize = 10;
 const BOARD_WIDTH: usize = 10;
 
 fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
-    board[3][3] = 'o';
-    board[3][4] = 'x';
-    board[4][3] = 'x';
     board[4][4] = 'o';
+    board[4][5] = 'x';
+    board[5][4] = 'x';
+    board[5][5] = 'o';
+    for i in 0..10 {
+        board[0][i] = '#';
+        board[i][0] = '#';
+        board[9][i] = '#';
+        board[i][9] = '#';
+    }
 }
 
 fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
