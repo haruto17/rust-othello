@@ -2,8 +2,8 @@ use proconio::input;
 // o == white
 // x == black
 
-const BOARD_HEIGHT: usize = 8;
-const BOARD_WIDTH: usize = 8;
+const BOARD_HEIGHT: usize = 10;
+const BOARD_WIDTH: usize = 10;
 
 fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
     board[3][3] = 'o';
@@ -13,8 +13,8 @@ fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
 }
 
 fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
-    for i in 0..8 {
-        for j in 0..8 {
+    for i in 1..=8 {
+        for j in 1..=8 {
             print!("{}", board[i][j]);
         }
         println!();
