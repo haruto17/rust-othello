@@ -22,7 +22,15 @@ fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
 }
 
 fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
+    print!("  ");
     for i in 1..=8 {
+        print!("{}", i);
+    }
+
+    println!();
+
+    for i in 1..=8 {
+        print!("{} ", i);
         for j in 1..=8 {
             print!("{}", board[i][j]);
         }
