@@ -50,7 +50,7 @@ fn update_board(
         // N
         let n_x = *x;
         let mut n_y = *y;
-        while board[n_x][n_y] != '#' {
+        while board[n_x][n_y] != WALL {
             if board[n_x][n_y] == WHITE {
                 board[n_x][n_y] = BLACK;
             } else {
@@ -62,7 +62,7 @@ fn update_board(
         // NE
         let mut ne_x = *x;
         let mut ne_y = *y;
-        while board[ne_x][ne_y] != '#' {
+        while board[ne_x][ne_y] != WALL {
             if board[ne_x][ne_y] == WHITE {
                 board[ne_x][ne_y] = BLACK;
             } else {
@@ -75,7 +75,7 @@ fn update_board(
         // E
         let mut e_x = *x;
         let e_y = *y;
-        while board[e_x][e_y] != '#' {
+        while board[e_x][e_y] != WALL {
             if board[e_x][e_y] == WHITE {
                 board[e_x][e_y] = BLACK;
             } else {
@@ -87,7 +87,7 @@ fn update_board(
         // SE
         let mut se_x = *x;
         let mut se_y = *y;
-        while board[se_x][se_y] != '#' {
+        while board[se_x][se_y] != WALL {
             if board[se_x][se_y] == WHITE {
                 board[se_x][se_y] = BLACK;
             } else {
@@ -100,7 +100,7 @@ fn update_board(
         // S
         let s_x = *x;
         let mut s_y = *y;
-        while board[s_x][s_y] != '#' {
+        while board[s_x][s_y] != WALL {
             if board[s_x][s_y] == WHITE {
                 board[s_x][s_y] = BLACK;
             } else {
@@ -112,7 +112,7 @@ fn update_board(
         // SW
         let mut sw_x = *x;
         let mut sw_y = *y;
-        while board[sw_x][sw_y] != '#' {
+        while board[sw_x][sw_y] != WALL {
             if board[sw_x][sw_y] == WHITE {
                 board[sw_x][sw_y] = BLACK;
             } else {
@@ -125,7 +125,7 @@ fn update_board(
         // W
         let mut w_x = *x;
         let w_y = *y;
-        while board[w_x][w_y] != '#' {
+        while board[w_x][w_y] != WALL {
             if board[w_x][w_y] == WHITE {
                 board[w_x][w_y] = BLACK;
             } else {
@@ -137,7 +137,7 @@ fn update_board(
         // NW
         let mut nw_x = *x;
         let mut nw_y = *y;
-        while board[nw_x][nw_y] != '#' {
+        while board[nw_x][nw_y] != WALL {
             if board[nw_x][nw_y] == WHITE {
                 board[n_x][n_y] = BLACK;
             } else {
@@ -152,7 +152,7 @@ fn update_board(
         // N
         let n_x = *x;
         let mut n_y = *y;
-        while board[n_x][n_y] != '#' {
+        while board[n_x][n_y] != WALL {
             if board[n_x][n_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -164,7 +164,7 @@ fn update_board(
         // NE
         let mut ne_x = *x;
         let mut ne_y = *y;
-        while board[ne_x][ne_y] != '#' {
+        while board[ne_x][ne_y] != WALL {
             if board[n_x][n_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -177,7 +177,7 @@ fn update_board(
         // E
         let mut e_x = *x;
         let e_y = *y;
-        while board[e_x][e_y] != '#' {
+        while board[e_x][e_y] != WALL {
             if board[e_x][e_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -189,7 +189,7 @@ fn update_board(
         // SE
         let mut se_x = *x;
         let mut se_y = *y;
-        while board[se_x][se_y] != '#' {
+        while board[se_x][se_y] != WALL {
             if board[se_x][se_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -202,7 +202,7 @@ fn update_board(
         // S
         let s_x = *x;
         let mut s_y = *y;
-        while board[s_x][s_y] != '#' {
+        while board[s_x][s_y] != WALL {
             if board[s_x][s_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -214,7 +214,7 @@ fn update_board(
         // SW
         let mut sw_x = *x;
         let mut sw_y = *y;
-        while board[sw_x][sw_y] != '#' {
+        while board[sw_x][sw_y] != WALL {
             if board[sw_x][sw_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -227,7 +227,7 @@ fn update_board(
         // W
         let mut w_x = *x;
         let w_y = *y;
-        while board[w_x][w_y] != '#' {
+        while board[w_x][w_y] != WALL {
             if board[w_x][w_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -239,7 +239,7 @@ fn update_board(
         // NW
         let mut nw_x = *x;
         let mut nw_y = *y;
-        while board[nw_x][nw_y] != '#' {
+        while board[nw_x][nw_y] != WALL {
             if board[nw_x][nw_y] == BLACK {
                 board[n_x][n_y] = WHITE;
             } else {
@@ -261,7 +261,7 @@ fn check_can_put(
     let mut check_n: bool = false;
     let mut n_y = *y;
     let n_x = *x;
-    while board[n_y][n_x] != '#' {
+    while board[n_y][n_x] != WALL {
         if board[n_y][n_x] == player {
             if check_n {
                 return Ok(());
@@ -277,7 +277,7 @@ fn check_can_put(
     let mut check_ne: bool = false;
     let mut ne_y = *y;
     let mut ne_x = *x;
-    while board[ne_y][ne_x] != '#' {
+    while board[ne_y][ne_x] != WALL {
         if board[ne_y][ne_x] == player {
             if check_ne == true {
                 return Ok(());
@@ -294,7 +294,7 @@ fn check_can_put(
     let mut check_e: bool = false;
     let e_y = *y;
     let mut e_x = *x;
-    while board[e_y][e_x] != '#' {
+    while board[e_y][e_x] != WALL {
         if board[e_y][e_x] == player {
             if check_e {
                 return Ok(());
@@ -310,7 +310,7 @@ fn check_can_put(
     let mut check_se: bool = false;
     let mut se_y = *y;
     let mut se_x = *x;
-    while board[se_y][se_x] != '#' {
+    while board[se_y][se_x] != WALL {
         if board[se_y][se_x] == player {
             if check_se {
                 return Ok(());
@@ -327,7 +327,7 @@ fn check_can_put(
     let mut check_s: bool = false;
     let mut s_y = *y;
     let s_x = *x;
-    while board[s_y][s_x] != '#' {
+    while board[s_y][s_x] != WALL {
         if board[s_y][s_x] == player {
             if check_s {
                 return Ok(());
@@ -343,7 +343,7 @@ fn check_can_put(
     let mut check_sw: bool = false;
     let mut sw_y = *y;
     let mut sw_x = *x;
-    while board[sw_y][sw_x] != '#' {
+    while board[sw_y][sw_x] != WALL {
         if board[sw_y][sw_x] == player {
             if check_sw {
                 return Ok(());
@@ -360,7 +360,7 @@ fn check_can_put(
     let mut check_w: bool = false;
     let w_y = *y;
     let mut w_x = *x;
-    while board[w_y][w_x] != '#' {
+    while board[w_y][w_x] != WALL {
         if board[w_y][w_x] == player {
             if check_w {
                 return Ok(());
@@ -376,7 +376,7 @@ fn check_can_put(
     let mut check_nw: bool = false;
     let mut nw_y = *y;
     let mut nw_x = *x;
-    while board[nw_y][nw_x] != '#' {
+    while board[nw_y][nw_x] != WALL {
         if board[nw_y][nw_x] == player {
             if check_nw {
                 return Ok(());
