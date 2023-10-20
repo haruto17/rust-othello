@@ -419,8 +419,8 @@ fn main() {
             draw_board(&board);
             println!("y x");
             input! {
-                x: usize,
                 y: usize,
+                x: usize,
             }
             match check_can_put(&board, BLACK, &x, &y) {
                 Ok(()) => {
@@ -434,8 +434,8 @@ fn main() {
             draw_board(&board);
             println!("y x");
             input! {
-                x: usize,
                 y: usize,
+                x: usize,
             }
             match check_can_put(&board, WHITE, &x, &y) {
                 Ok(()) => {
