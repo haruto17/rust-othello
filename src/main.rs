@@ -5,6 +5,7 @@ use proconio::input;
 const BOARD_HEIGHT: usize = 10;
 const BOARD_WIDTH: usize = 10;
 const WALL: char = '#';
+const EMPTY: char = '-';
 const WHITE: char = 'o';
 const BLACK: char = 'x';
 
@@ -233,144 +234,165 @@ fn check_can_put(
     y: &usize,
     x: &usize,
 ) -> Result<(), String> {
+    if board[*y][*x] != EMPTY {
+        return Err("そこにはおけないよ".to_string());
+    }
+
     // N
-    let mut check_n: bool = false;
+    let mut check_n = false;
     let mut n_y = *y;
     let n_x = *x;
     while board[n_y][n_x] != WALL {
+        n_y -= 1;
         if board[n_y][n_x] == player {
             if check_n {
                 return Ok(());
             }
-        }
-        if board[n_y][n_x] != player && board[n_y][n_x] != '-' {
+        } else if board[n_y][n_x] != '-' {
             check_n = true;
+            continue;
+        } else {
+            break;
         }
-        n_y -= 1;
     }
 
     // NE
-    let mut check_ne: bool = false;
+    let mut check_ne = false;
     let mut ne_y = *y;
     let mut ne_x = *x;
     while board[ne_y][ne_x] != WALL {
-        if board[ne_y][ne_x] == player {
-            if check_ne == true {
-                return Ok(());
-            }
-        }
-        if board[ne_y][ne_x] != player && board[ne_y][ne_x] != '-' {
-            check_ne = true;
-        }
         ne_y -= 1;
         ne_x += 1;
+        if board[ne_y][ne_x] == player {
+            if check_ne {
+                return Ok(());
+            }
+        } else if board[ne_y][ne_x] != EMPTY {
+            check_ne = true;
+            continue;
+        } else {
+            break;
+        }
     }
 
     // E
-    let mut check_e: bool = false;
+    let mut check_e = false;
     let e_y = *y;
     let mut e_x = *x;
     while board[e_y][e_x] != WALL {
+        e_x += 1;
         if board[e_y][e_x] == player {
             if check_e {
                 return Ok(());
             }
-        }
-        if board[e_y][e_x] != player && board[e_y][e_x] != '-' {
+        } else if board[e_y][e_x] != EMPTY {
             check_e = true;
+            continue;
+        } else {
+            break;
         }
-        e_x += 1;
     }
 
     // SE
-    let mut check_se: bool = false;
+    let mut check_se = false;
     let mut se_y = *y;
     let mut se_x = *x;
     while board[se_y][se_x] != WALL {
+        se_y += 1;
+        se_x += 1;
         if board[se_y][se_x] == player {
             if check_se {
                 return Ok(());
             }
-        }
-        if board[se_y][se_x] != player && board[se_y][se_x] != '-' {
+        } else if board[se_y][se_x] != EMPTY {
             check_se = true;
+            continue;
+        } else {
+            break;
         }
-        se_y += 1;
-        se_x += 1;
     }
 
     // S
-    let mut check_s: bool = false;
+    let mut check_s = false;
     let mut s_y = *y;
     let s_x = *x;
     while board[s_y][s_x] != WALL {
+        s_y += 1;
         if board[s_y][s_x] == player {
             if check_s {
                 return Ok(());
             }
-        }
-        if board[s_y][s_x] != player && board[s_y][s_x] != '-' {
+        } else if board[s_y][s_x] != EMPTY {
             check_s = true;
+            continue;
+        } else {
+            break;
         }
-        s_y += 1;
     }
 
     // SW
-    let mut check_sw: bool = false;
+    let mut check_sw = false;
     let mut sw_y = *y;
     let mut sw_x = *x;
     while board[sw_y][sw_x] != WALL {
+        sw_y += 1;
+        sw_x -= 1;
         if board[sw_y][sw_x] == player {
             if check_sw {
                 return Ok(());
             }
-        }
-        if board[sw_y][sw_x] != player && board[sw_y][sw_x] != '-' {
+        } else if board[sw_y][sw_x] != EMPTY {
             check_sw = true;
+            continue;
+        } else {
+            break;
         }
-        sw_y += 1;
-        sw_x -= 1;
     }
 
     // W
-    let mut check_w: bool = false;
+    let mut check_w = false;
     let w_y = *y;
     let mut w_x = *x;
     while board[w_y][w_x] != WALL {
+        w_x -= 1;
         if board[w_y][w_x] == player {
             if check_w {
                 return Ok(());
             }
-        }
-        if board[w_y][w_x] != player && board[w_y][w_x] != '-' {
+        } else if board[w_y][w_x] != EMPTY {
             check_w = true;
+            continue;
+        } else {
+            break;
         }
-        w_x -= 1;
     }
 
     // NW
-    let mut check_nw: bool = false;
+    let mut check_nw = false;
     let mut nw_y = *y;
     let mut nw_x = *x;
     while board[nw_y][nw_x] != WALL {
+        nw_y -= 1;
+        nw_x -= 1;
         if board[nw_y][nw_x] == player {
             if check_nw {
                 return Ok(());
             }
-        }
-        if board[nw_y][nw_x] != player && board[nw_y][nw_x] != '-' {
+        } else if board[nw_y][nw_x] != EMPTY {
             check_nw = true;
+            continue;
+        } else {
+            break;
         }
-        nw_y -= 1;
-        nw_x -= 1;
     }
+
     return Err("そこにはおけないよ".to_string());
 }
 
 fn main() {
     let mut turn = 1;
 
-    let mut board: [[char; BOARD_WIDTH]; BOARD_HEIGHT] = [['-'; BOARD_WIDTH]; BOARD_HEIGHT];
+    let mut board: [[char; BOARD_WIDTH]; BOARD_HEIGHT] = [[EMPTY; BOARD_WIDTH]; BOARD_HEIGHT];
     init_board(&mut board);
 
     loop {
