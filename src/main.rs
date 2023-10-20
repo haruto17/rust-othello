@@ -40,214 +40,190 @@ fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
 
 fn update_board(
     board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT],
-    player: usize,
-    x: &usize,
+    player: char,
     y: &usize,
+    x: &usize,
 ) {
-    if player == 1 {
-        board[*x][*y] = BLACK;
+    if player == BLACK {
+        board[*y][*x] = BLACK;
+    } else if player == WHITE {
+        board[*y][*x] = WHITE;
+    }
 
-        // N
-        let n_x = *x;
-        let mut n_y = *y;
-        while board[n_x][n_y] != WALL {
-            if board[n_x][n_y] == WHITE {
-                board[n_x][n_y] = BLACK;
+    // N
+    let mut n_y = *y;
+    let n_x = *x;
+    n_y -= 1;
+    while board[n_y][n_x] != WALL {
+        if player == BLACK {
+            if board[n_y][n_x] == WHITE {
+                board[n_y][n_x] = BLACK;
             } else {
                 break;
             }
-            n_y -= 1;
-        }
-
-        // NE
-        let mut ne_x = *x;
-        let mut ne_y = *y;
-        while board[ne_x][ne_y] != WALL {
-            if board[ne_x][ne_y] == WHITE {
-                board[ne_x][ne_y] = BLACK;
+        } else if player == WHITE {
+            if board[n_y][n_x] == BLACK {
+                board[n_y][n_x] = WHITE;
             } else {
                 break;
             }
-            ne_x += 1;
-            ne_y -= 1;
         }
+        n_y -= 1;
+    }
 
-        // E
-        let mut e_x = *x;
-        let e_y = *y;
-        while board[e_x][e_y] != WALL {
-            if board[e_x][e_y] == WHITE {
-                board[e_x][e_y] = BLACK;
+    // NE
+    let mut ne_y = *y;
+    let mut ne_x = *x;
+    ne_y -= 1;
+    ne_x += 1;
+    while board[ne_y][ne_x] != WALL {
+        if player == BLACK {
+            if board[ne_y][ne_x] == WHITE {
+                board[ne_y][ne_x] = BLACK;
             } else {
                 break;
             }
-            e_x += 1;
-        }
-
-        // SE
-        let mut se_x = *x;
-        let mut se_y = *y;
-        while board[se_x][se_y] != WALL {
-            if board[se_x][se_y] == WHITE {
-                board[se_x][se_y] = BLACK;
+        } else if player == WHITE {
+            if board[ne_y][ne_x] == BLACK {
+                board[ne_y][ne_x] = WHITE;
             } else {
                 break;
             }
-            se_x += 1;
-            se_y += 1;
         }
+        ne_y -= 1;
+        ne_x += 1;
+    }
 
-        // S
-        let s_x = *x;
-        let mut s_y = *y;
-        while board[s_x][s_y] != WALL {
-            if board[s_x][s_y] == WHITE {
-                board[s_x][s_y] = BLACK;
+    // E
+    let e_y = *y;
+    let mut e_x = *x;
+    e_x += 1;
+    while board[e_y][e_x] != WALL {
+        if player == BLACK {
+            if board[e_y][e_x] == WHITE {
+                board[e_y][e_x] = BLACK;
             } else {
                 break;
             }
-            s_y += 1;
-        }
-
-        // SW
-        let mut sw_x = *x;
-        let mut sw_y = *y;
-        while board[sw_x][sw_y] != WALL {
-            if board[sw_x][sw_y] == WHITE {
-                board[sw_x][sw_y] = BLACK;
+        } else if player == WHITE {
+            if board[e_y][e_x] == BLACK {
+                board[e_y][e_x] = WHITE;
             } else {
                 break;
             }
-            sw_x -= 1;
-            sw_y += 1;
         }
+        e_x += 1;
+    }
 
-        // W
-        let mut w_x = *x;
-        let w_y = *y;
-        while board[w_x][w_y] != WALL {
-            if board[w_x][w_y] == WHITE {
-                board[w_x][w_y] = BLACK;
+    // SE
+    let mut se_y = *y;
+    let mut se_x = *x;
+    se_y += 1;
+    se_x += 1;
+    while board[se_y][se_x] != WALL {
+        if player == BLACK {
+            if board[se_y][se_x] == WHITE {
+                board[se_y][se_x] = BLACK;
             } else {
                 break;
             }
-            w_x -= 1;
-        }
-
-        // NW
-        let mut nw_x = *x;
-        let mut nw_y = *y;
-        while board[nw_x][nw_y] != WALL {
-            if board[nw_x][nw_y] == WHITE {
-                board[n_x][n_y] = BLACK;
+        } else if player == WHITE {
+            if board[se_y][se_x] == BLACK {
+                board[se_y][se_x] = WHITE;
             } else {
                 break;
             }
-            nw_x -= 1;
-            nw_y -= 1;
         }
-    } else {
-        board[*x][*y] = WHITE;
+        se_y += 1;
+        se_x += 1;
+    }
 
-        // N
-        let n_x = *x;
-        let mut n_y = *y;
-        while board[n_x][n_y] != WALL {
-            if board[n_x][n_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+    // S
+    let mut s_y = *y;
+    let s_x = *x;
+    s_y += 1;
+    while board[s_y][s_x] != WALL {
+        if player == BLACK {
+            if board[s_y][s_x] == WHITE {
+                board[s_y][s_x] = BLACK;
             } else {
                 break;
             }
-            n_y -= 1;
-        }
-
-        // NE
-        let mut ne_x = *x;
-        let mut ne_y = *y;
-        while board[ne_x][ne_y] != WALL {
-            if board[n_x][n_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+        } else if player == WHITE {
+            if board[s_y][s_x] == BLACK {
+                board[s_y][s_x] = WHITE;
             } else {
                 break;
             }
-            ne_x += 1;
-            ne_y -= 1;
         }
+        s_y += 1;
+    }
 
-        // E
-        let mut e_x = *x;
-        let e_y = *y;
-        while board[e_x][e_y] != WALL {
-            if board[e_x][e_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+    // SW
+    let mut sw_y = *y;
+    let mut sw_x = *x;
+    sw_y += 1;
+    sw_x -= 1;
+    while board[sw_y][sw_x] != WALL {
+        if player == BLACK {
+            if board[sw_y][sw_x] == WHITE {
+                board[sw_y][sw_x] = BLACK;
             } else {
                 break;
             }
-            e_x += 1;
-        }
-
-        // SE
-        let mut se_x = *x;
-        let mut se_y = *y;
-        while board[se_x][se_y] != WALL {
-            if board[se_x][se_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+        } else if player == WHITE {
+            if board[sw_y][sw_x] == BLACK {
+                board[sw_y][sw_x] = WHITE;
             } else {
                 break;
             }
-            se_x += 1;
-            se_y += 1;
         }
+        sw_y += 1;
+        sw_x -= 1;
+    }
 
-        // S
-        let s_x = *x;
-        let mut s_y = *y;
-        while board[s_x][s_y] != WALL {
-            if board[s_x][s_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+    // W
+    let w_y = *y;
+    let mut w_x = *x;
+    w_x -= 1;
+    while board[w_y][w_x] != WALL {
+        if player == BLACK {
+            if board[w_y][w_x] == WHITE {
+                board[w_y][w_x] = BLACK;
             } else {
                 break;
             }
-            s_y += 1;
-        }
-
-        // SW
-        let mut sw_x = *x;
-        let mut sw_y = *y;
-        while board[sw_x][sw_y] != WALL {
-            if board[sw_x][sw_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+        } else if player == WHITE {
+            if board[w_y][w_x] == BLACK {
+                board[w_y][w_x] = WHITE;
             } else {
                 break;
             }
-            sw_x -= 1;
-            sw_y += 1;
         }
+        w_x -= 1;
+    }
 
-        // W
-        let mut w_x = *x;
-        let w_y = *y;
-        while board[w_x][w_y] != WALL {
-            if board[w_x][w_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+    // NW
+    let mut nw_y = *y;
+    let mut nw_x = *x;
+    nw_y -= 1;
+    nw_x -= 1;
+    while board[nw_y][nw_x] != WALL {
+        if player == BLACK {
+            if board[nw_y][nw_x] == WHITE {
+                board[nw_y][nw_x] = BLACK;
             } else {
                 break;
             }
-            w_x -= 1;
-        }
-
-        // NW
-        let mut nw_x = *x;
-        let mut nw_y = *y;
-        while board[nw_x][nw_y] != WALL {
-            if board[nw_x][nw_y] == BLACK {
-                board[n_x][n_y] = WHITE;
+        } else if player == WHITE {
+            if board[nw_y][nw_x] == BLACK {
+                board[nw_y][nw_x] = WHITE;
             } else {
                 break;
             }
-            nw_x -= 1;
-            nw_y -= 1;
         }
+        nw_y -= 1;
+        nw_x -= 1;
     }
 }
 
@@ -408,7 +384,7 @@ fn main() {
             }
             match check_can_put(&board, BLACK, &y, &x) {
                 Ok(()) => {
-                    update_board(&mut board, 1, &y, &x);
+                    update_board(&mut board, BLACK, &y, &x);
                     turn += 1;
                 }
                 Err(e) => {
@@ -427,7 +403,7 @@ fn main() {
             }
             match check_can_put(&board, WHITE, &y, &x) {
                 Ok(()) => {
-                    update_board(&mut board, 2, &y, &x);
+                    update_board(&mut board, WHITE, &y, &x);
                     turn += 1;
                 }
                 Err(e) => {
