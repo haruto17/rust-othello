@@ -254,157 +254,141 @@ fn update_board(
 fn check_can_put(
     board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT],
     player: char,
-    x: &usize,
     y: &usize,
+    x: &usize,
 ) -> Result<(), ()> {
     // N
     let mut check_n: bool = false;
-    let n_x = *x;
     let mut n_y = *y;
-    while board[n_x][n_y] != '#' {
-        if board[n_x][n_y] == player {
+    let n_x = *x;
+    while board[n_y][n_x] != '#' {
+        if board[n_y][n_x] == player {
             if check_n {
                 return Ok(());
             }
         }
-
-        if board[n_x][n_y] != player {
+        if board[n_y][n_x] != player {
             check_n = true;
         }
-
         n_y -= 1;
     }
 
     // NE
     let mut check_ne: bool = false;
-    let mut ne_x = *x;
     let mut ne_y = *y;
-    while board[ne_x][ne_y] != '#' {
-        if board[ne_x][ne_y] == player {
-            if check_ne {
+    let mut ne_x = *x;
+    while board[ne_y][ne_x] != '#' {
+        if board[ne_y][ne_x] == player {
+            if check_ne == true {
                 return Ok(());
             }
         }
-
-        if board[ne_x][ne_y] != player {
+        if board[ne_y][ne_x] != player {
             check_ne = true;
         }
-
-        ne_x += 1;
         ne_y -= 1;
+        ne_x += 1;
     }
 
     // E
     let mut check_e: bool = false;
-    let mut e_x = *x;
     let e_y = *y;
-    while board[e_x][e_y] != '#' {
-        if board[e_x][e_y] == player {
+    let mut e_x = *x;
+    while board[e_y][e_x] != '#' {
+        if board[e_y][e_x] == player {
             if check_e {
                 return Ok(());
             }
         }
-
-        if board[e_x][e_y] != player {
+        if board[e_y][e_x] != player {
             check_e = true;
         }
-
         e_x += 1;
     }
 
     // SE
     let mut check_se: bool = false;
-    let mut se_x = *x;
     let mut se_y = *y;
-    while board[se_x][se_y] != '#' {
-        if board[se_x][se_y] == player {
+    let mut se_x = *x;
+    while board[se_y][se_x] != '#' {
+        if board[se_y][se_x] == player {
             if check_se {
                 return Ok(());
             }
         }
-
-        if board[se_x][se_y] != player {
+        if board[se_y][se_x] != player {
             check_se = true;
         }
-
-        se_x += 1;
         se_y += 1;
+        se_x += 1;
     }
 
     // S
     let mut check_s: bool = false;
-    let s_x = *x;
     let mut s_y = *y;
-    while board[s_x][s_y] != '#' {
-        if board[s_x][s_y] == player {
+    let s_x = *x;
+    while board[s_y][s_x] != '#' {
+        if board[s_y][s_x] == player {
             if check_s {
                 return Ok(());
             }
         }
-
-        if board[s_x][s_y] != player {
+        if board[s_y][s_x] != player {
             check_s = true;
         }
-
         s_y += 1;
     }
 
     // SW
     let mut check_sw: bool = false;
-    let mut sw_x = *x;
     let mut sw_y = *y;
-    while board[sw_x][sw_y] != '#' {
-        if board[sw_x][sw_y] == player {
+    let mut sw_x = *x;
+    while board[sw_y][sw_x] != '#' {
+        if board[sw_y][sw_x] == player {
             if check_sw {
                 return Ok(());
             }
         }
-
-        if board[sw_x][sw_y] != player {
+        if board[sw_y][sw_x] != player {
             check_sw = true;
         }
-
-        sw_x -= 1;
         sw_y += 1;
+        sw_x -= 1;
     }
 
     // W
     let mut check_w: bool = false;
-    let mut w_x = *x;
     let w_y = *y;
-    while board[w_x][w_y] != '#' {
-        if board[w_x][w_y] == player {
+    let mut w_x = *x;
+    while board[w_y][w_x] != '#' {
+        if board[w_y][w_x] == player {
             if check_w {
                 return Ok(());
             }
         }
-
-        if board[w_x][w_y] != player {
+        if board[w_y][w_x] != player {
             check_w = true;
         }
-
         w_x -= 1;
     }
 
     // NW
     let mut check_nw: bool = false;
-    let mut nw_x = *x;
     let mut nw_y = *y;
-    while board[nw_x][nw_y] != '#' {
-        if board[nw_x][nw_y] == player {
+    let mut nw_x = *x;
+    while board[nw_y][nw_x] != '#' {
+        if board[nw_y][nw_x] == player {
             if check_nw {
                 return Ok(());
             }
         }
-
-        if board[nw_x][nw_y] != player {
+        if board[nw_y][nw_x] != player {
             check_nw = true;
         }
-
-        nw_x -= 1;
         nw_y -= 1;
+        nw_x -= 1;
     }
-    Err(())
+    return Err(());
 }
 
 fn main() {
@@ -422,9 +406,9 @@ fn main() {
                 y: usize,
                 x: usize,
             }
-            match check_can_put(&board, BLACK, &x, &y) {
+            match check_can_put(&board, BLACK, &y, &x) {
                 Ok(()) => {
-                    update_board(&mut board, 1, &x, &y);
+                    update_board(&mut board, 1, &y, &x);
                     turn += 1;
                 }
                 Err(()) => continue,
@@ -437,9 +421,9 @@ fn main() {
                 y: usize,
                 x: usize,
             }
-            match check_can_put(&board, WHITE, &x, &y) {
+            match check_can_put(&board, WHITE, &y, &x) {
                 Ok(()) => {
-                    update_board(&mut board, 2, &x, &y);
+                    update_board(&mut board, 2, &y, &x);
                     turn += 1;
                 }
                 Err(()) => continue,
