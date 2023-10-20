@@ -8,6 +8,16 @@ const WALL: char = '#';
 const EMPTY: char = '-';
 const WHITE: char = 'o';
 const BLACK: char = 'x';
+const INDEX: [(isize, isize); 8] = [
+    (-1, 0),
+    (-1, 1),
+    (0, 1),
+    (1, 1),
+    (1, 0),
+    (1, -1),
+    (0, -1),
+    (-1, -1),
+];
 
 fn init_board(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
     board[4][4] = WHITE;
