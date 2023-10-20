@@ -38,11 +38,216 @@ fn draw_board(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
     }
 }
 
-fn put_stone(board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT], player: usize, x: usize, y: usize) {
+fn update_board(
+    board: &mut [[char; BOARD_WIDTH]; BOARD_HEIGHT],
+    player: usize,
+    x: &usize,
+    y: &usize,
+) {
     if player == 1 {
-        board[x][y] = BLACK;
+        board[*x][*y] = BLACK;
+
+        // N
+        let n_x = *x;
+        let mut n_y = *y;
+        while board[n_x][n_y] != '#' {
+            if board[n_x][n_y] == WHITE {
+                board[n_x][n_y] = BLACK;
+            } else {
+                break;
+            }
+            n_y -= 1;
+        }
+
+        // NE
+        let mut ne_x = *x;
+        let mut ne_y = *y;
+        while board[ne_x][ne_y] != '#' {
+            if board[ne_x][ne_y] == WHITE {
+                board[ne_x][ne_y] = BLACK;
+            } else {
+                break;
+            }
+            ne_x += 1;
+            ne_y -= 1;
+        }
+
+        // E
+        let mut e_x = *x;
+        let e_y = *y;
+        while board[e_x][e_y] != '#' {
+            if board[e_x][e_y] == WHITE {
+                board[e_x][e_y] = BLACK;
+            } else {
+                break;
+            }
+            e_x += 1;
+        }
+
+        // SE
+        let mut se_x = *x;
+        let mut se_y = *y;
+        while board[se_x][se_y] != '#' {
+            if board[se_x][se_y] == WHITE {
+                board[se_x][se_y] = BLACK;
+            } else {
+                break;
+            }
+            se_x += 1;
+            se_y += 1;
+        }
+
+        // S
+        let s_x = *x;
+        let mut s_y = *y;
+        while board[s_x][s_y] != '#' {
+            if board[s_x][s_y] == WHITE {
+                board[s_x][s_y] = BLACK;
+            } else {
+                break;
+            }
+            s_y += 1;
+        }
+
+        // SW
+        let mut sw_x = *x;
+        let mut sw_y = *y;
+        while board[sw_x][sw_y] != '#' {
+            if board[sw_x][sw_y] == WHITE {
+                board[sw_x][sw_y] = BLACK;
+            } else {
+                break;
+            }
+            sw_x -= 1;
+            sw_y += 1;
+        }
+
+        // W
+        let mut w_x = *x;
+        let w_y = *y;
+        while board[w_x][w_y] != '#' {
+            if board[w_x][w_y] == WHITE {
+                board[w_x][w_y] = BLACK;
+            } else {
+                break;
+            }
+            w_x -= 1;
+        }
+
+        // NW
+        let mut nw_x = *x;
+        let mut nw_y = *y;
+        while board[nw_x][nw_y] != '#' {
+            if board[nw_x][nw_y] == WHITE {
+                board[n_x][n_y] = BLACK;
+            } else {
+                break;
+            }
+            nw_x -= 1;
+            nw_y -= 1;
+        }
     } else {
-        board[x][y] = WHITE;
+        board[*x][*y] = WHITE;
+
+        // N
+        let n_x = *x;
+        let mut n_y = *y;
+        while board[n_x][n_y] != '#' {
+            if board[n_x][n_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            n_y -= 1;
+        }
+
+        // NE
+        let mut ne_x = *x;
+        let mut ne_y = *y;
+        while board[ne_x][ne_y] != '#' {
+            if board[n_x][n_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            ne_x += 1;
+            ne_y -= 1;
+        }
+
+        // E
+        let mut e_x = *x;
+        let e_y = *y;
+        while board[e_x][e_y] != '#' {
+            if board[e_x][e_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            e_x += 1;
+        }
+
+        // SE
+        let mut se_x = *x;
+        let mut se_y = *y;
+        while board[se_x][se_y] != '#' {
+            if board[se_x][se_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            se_x += 1;
+            se_y += 1;
+        }
+
+        // S
+        let s_x = *x;
+        let mut s_y = *y;
+        while board[s_x][s_y] != '#' {
+            if board[s_x][s_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            s_y += 1;
+        }
+
+        // SW
+        let mut sw_x = *x;
+        let mut sw_y = *y;
+        while board[sw_x][sw_y] != '#' {
+            if board[sw_x][sw_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            sw_x -= 1;
+            sw_y += 1;
+        }
+
+        // W
+        let mut w_x = *x;
+        let w_y = *y;
+        while board[w_x][w_y] != '#' {
+            if board[w_x][w_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            w_x -= 1;
+        }
+
+        // NW
+        let mut nw_x = *x;
+        let mut nw_y = *y;
+        while board[nw_x][nw_y] != '#' {
+            if board[nw_x][nw_y] == BLACK {
+                board[n_x][n_y] = WHITE;
+            } else {
+                break;
+            }
+            nw_x -= 1;
+            nw_y -= 1;
+        }
     }
 }
 
@@ -218,7 +423,7 @@ fn main() {
             }
             match check_can_put(&board, BLACK, &x, &y) {
                 Ok(()) => {
-                    put_stone(&mut board, 1, x, y);
+                    update_board(&mut board, 1, &x, &y);
                     turn += 1;
                 }
                 Err(()) => continue,
@@ -232,7 +437,7 @@ fn main() {
             }
             match check_can_put(&board, WHITE, &x, &y) {
                 Ok(()) => {
-                    put_stone(&mut board, 2, x, y);
+                    update_board(&mut board, 2, &x, &y);
                     turn += 1;
                 }
                 Err(()) => continue,
