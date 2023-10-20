@@ -417,6 +417,7 @@ fn main() {
         if turn % 2 != 0 {
             println!("Turn {}: {BLACK}", turn);
             draw_board(&board);
+            println!("y x");
             input! {
                 x: usize,
                 y: usize,
@@ -431,6 +432,7 @@ fn main() {
         } else {
             println!("Turn {}: {WHITE}", turn);
             draw_board(&board);
+            println!("y x");
             input! {
                 x: usize,
                 y: usize,
