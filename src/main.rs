@@ -256,7 +256,7 @@ fn check_can_put(
     player: char,
     y: &usize,
     x: &usize,
-) -> Result<(), ()> {
+) -> Result<(), String> {
     // N
     let mut check_n: bool = false;
     let mut n_y = *y;
@@ -267,7 +267,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[n_y][n_x] != player {
+        if board[n_y][n_x] != player && board[n_y][n_x] != '-' {
             check_n = true;
         }
         n_y -= 1;
@@ -283,7 +283,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[ne_y][ne_x] != player {
+        if board[ne_y][ne_x] != player && board[ne_y][ne_x] != '-' {
             check_ne = true;
         }
         ne_y -= 1;
@@ -300,7 +300,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[e_y][e_x] != player {
+        if board[e_y][e_x] != player && board[e_y][e_x] != '-' {
             check_e = true;
         }
         e_x += 1;
@@ -316,7 +316,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[se_y][se_x] != player {
+        if board[se_y][se_x] != player && board[se_y][se_x] != '-' {
             check_se = true;
         }
         se_y += 1;
@@ -333,7 +333,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[s_y][s_x] != player {
+        if board[s_y][s_x] != player && board[s_y][s_x] != '-' {
             check_s = true;
         }
         s_y += 1;
@@ -349,7 +349,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[sw_y][sw_x] != player {
+        if board[sw_y][sw_x] != player && board[sw_y][sw_x] != '-' {
             check_sw = true;
         }
         sw_y += 1;
@@ -366,7 +366,7 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[w_y][w_x] != player {
+        if board[w_y][w_x] != player && board[w_y][w_x] != '-' {
             check_w = true;
         }
         w_x -= 1;
@@ -382,13 +382,13 @@ fn check_can_put(
                 return Ok(());
             }
         }
-        if board[nw_y][nw_x] != player {
+        if board[nw_y][nw_x] != player && board[nw_y][nw_x] != '-' {
             check_nw = true;
         }
         nw_y -= 1;
         nw_x -= 1;
     }
-    return Err(());
+    return Err("そこにはおけないよ".to_string());
 }
 
 fn main() {
@@ -411,7 +411,10 @@ fn main() {
                     update_board(&mut board, 1, &y, &x);
                     turn += 1;
                 }
-                Err(()) => continue,
+                Err(e) => {
+                    println!("{}", e);
+                    continue;
+                }
             }
         } else {
             println!("Turn {}: {WHITE}", turn);
@@ -426,7 +429,11 @@ fn main() {
                     update_board(&mut board, 2, &y, &x);
                     turn += 1;
                 }
-                Err(()) => continue,
+                Err(e) => {
+                    println!("{}", e);
+                    println!();
+                    continue;
+                }
             }
         }
 
