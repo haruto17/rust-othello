@@ -269,6 +269,8 @@ fn check_can_put(
         if board[n_y][n_x] == player {
             if check_n {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[n_y][n_x] != '-' {
             check_n = true;
@@ -288,6 +290,8 @@ fn check_can_put(
         if board[ne_y][ne_x] == player {
             if check_ne {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[ne_y][ne_x] != EMPTY {
             check_ne = true;
@@ -306,6 +310,8 @@ fn check_can_put(
         if board[e_y][e_x] == player {
             if check_e {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[e_y][e_x] != EMPTY {
             check_e = true;
@@ -325,6 +331,8 @@ fn check_can_put(
         if board[se_y][se_x] == player {
             if check_se {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[se_y][se_x] != EMPTY {
             check_se = true;
@@ -343,6 +351,8 @@ fn check_can_put(
         if board[s_y][s_x] == player {
             if check_s {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[s_y][s_x] != EMPTY {
             check_s = true;
@@ -362,6 +372,8 @@ fn check_can_put(
         if board[sw_y][sw_x] == player {
             if check_sw {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[sw_y][sw_x] != EMPTY {
             check_sw = true;
@@ -380,6 +392,8 @@ fn check_can_put(
         if board[w_y][w_x] == player {
             if check_w {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[w_y][w_x] != EMPTY {
             check_w = true;
@@ -399,6 +413,8 @@ fn check_can_put(
         if board[nw_y][nw_x] == player {
             if check_nw {
                 return Ok(());
+            } else {
+                break;
             }
         } else if board[nw_y][nw_x] != EMPTY {
             check_nw = true;
