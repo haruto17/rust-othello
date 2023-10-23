@@ -62,179 +62,183 @@ fn update_board(
     }
 
     // N
+    let mut n_vec = Vec::new();
     let mut n_y = *y;
     let n_x = *x;
-    n_y -= 1;
     while board[n_y][n_x] != WALL {
-        if player == BLACK {
-            if board[n_y][n_x] == WHITE {
-                board[n_y][n_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[n_y][n_x] == BLACK {
-                board[n_y][n_x] = WHITE;
-            } else {
-                break;
+        n_y -= 1;
+        if board[n_y][n_x] == EMPTY {
+            break;
+        }
+        if board[n_y][n_x] != player {
+            n_vec.push((n_y, n_x));
+        } else if board[n_y][n_x] == player {
+            for i in &n_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
             }
         }
-        n_y -= 1;
     }
 
     // NE
+    let mut ne_vec = Vec::new();
     let mut ne_y = *y;
     let mut ne_x = *x;
-    ne_y -= 1;
-    ne_x += 1;
     while board[ne_y][ne_x] != WALL {
-        if player == BLACK {
-            if board[ne_y][ne_x] == WHITE {
-                board[ne_y][ne_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[ne_y][ne_x] == BLACK {
-                board[ne_y][ne_x] = WHITE;
-            } else {
-                break;
-            }
-        }
         ne_y -= 1;
         ne_x += 1;
+        if board[ne_y][ne_x] == EMPTY {
+            break;
+        }
+        if board[ne_y][ne_x] != player {
+            ne_vec.push((ne_y, ne_x));
+        } else if board[ne_y][ne_x] == player {
+            for i in &ne_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
+            }
+        }
     }
 
     // E
+    let mut e_vec = Vec::new();
     let e_y = *y;
     let mut e_x = *x;
-    e_x += 1;
     while board[e_y][e_x] != WALL {
-        if player == BLACK {
-            if board[e_y][e_x] == WHITE {
-                board[e_y][e_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[e_y][e_x] == BLACK {
-                board[e_y][e_x] = WHITE;
-            } else {
-                break;
+        e_x += 1;
+        if board[e_y][e_x] == EMPTY {
+            break;
+        }
+        if board[e_y][e_x] != player {
+            e_vec.push((e_y, e_x));
+        } else if board[e_y][e_x] == player {
+            for i in &e_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
             }
         }
-        e_x += 1;
     }
 
     // SE
+    let mut se_vec = Vec::new();
     let mut se_y = *y;
     let mut se_x = *x;
-    se_y += 1;
-    se_x += 1;
     while board[se_y][se_x] != WALL {
-        if player == BLACK {
-            if board[se_y][se_x] == WHITE {
-                board[se_y][se_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[se_y][se_x] == BLACK {
-                board[se_y][se_x] = WHITE;
-            } else {
-                break;
-            }
-        }
         se_y += 1;
         se_x += 1;
+        if board[se_y][se_x] == EMPTY {
+            break;
+        }
+        if board[se_y][se_x] != player {
+            se_vec.push((se_y, se_x));
+        } else if board[se_y][se_x] == player {
+            for i in &se_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
+            }
+        }
     }
 
     // S
+    let mut s_vec = Vec::new();
     let mut s_y = *y;
     let s_x = *x;
-    s_y += 1;
     while board[s_y][s_x] != WALL {
-        if player == BLACK {
-            if board[s_y][s_x] == WHITE {
-                board[s_y][s_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[s_y][s_x] == BLACK {
-                board[s_y][s_x] = WHITE;
-            } else {
-                break;
+        s_y += 1;
+        if board[s_y][s_x] == EMPTY {
+            break;
+        }
+        if board[s_y][s_x] != player {
+            s_vec.push((s_y, s_x));
+        } else if board[s_y][s_x] == player {
+            for i in &s_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
             }
         }
-        s_y += 1;
     }
 
     // SW
+    let mut sw_vec = Vec::new();
     let mut sw_y = *y;
     let mut sw_x = *x;
-    sw_y += 1;
-    sw_x -= 1;
     while board[sw_y][sw_x] != WALL {
-        if player == BLACK {
-            if board[sw_y][sw_x] == WHITE {
-                board[sw_y][sw_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[sw_y][sw_x] == BLACK {
-                board[sw_y][sw_x] = WHITE;
-            } else {
-                break;
-            }
-        }
         sw_y += 1;
         sw_x -= 1;
+        if board[sw_y][sw_x] == EMPTY {
+            break;
+        }
+        if board[sw_y][sw_x] != player {
+            sw_vec.push((sw_y, sw_x));
+        } else if board[sw_y][sw_x] == player {
+            for i in &sw_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
+            }
+        }
     }
 
     // W
+    let mut w_vec = Vec::new();
     let w_y = *y;
     let mut w_x = *x;
-    w_x -= 1;
     while board[w_y][w_x] != WALL {
-        if player == BLACK {
-            if board[w_y][w_x] == WHITE {
-                board[w_y][w_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[w_y][w_x] == BLACK {
-                board[w_y][w_x] = WHITE;
-            } else {
-                break;
+        w_x -= 1;
+        if board[w_y][w_x] == EMPTY {
+            break;
+        }
+        if board[w_y][w_x] != player {
+            w_vec.push((w_y, w_x));
+        } else if board[w_y][w_x] == player {
+            for i in &w_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
             }
         }
-        w_x -= 1;
     }
 
     // NW
+    let mut nw_vec = Vec::new();
     let mut nw_y = *y;
     let mut nw_x = *x;
-    nw_y -= 1;
-    nw_x -= 1;
     while board[nw_y][nw_x] != WALL {
-        if player == BLACK {
-            if board[nw_y][nw_x] == WHITE {
-                board[nw_y][nw_x] = BLACK;
-            } else {
-                break;
-            }
-        } else if player == WHITE {
-            if board[nw_y][nw_x] == BLACK {
-                board[nw_y][nw_x] = WHITE;
-            } else {
-                break;
-            }
-        }
         nw_y -= 1;
         nw_x -= 1;
+        if board[nw_y][nw_x] == EMPTY {
+            break;
+        }
+        if board[nw_y][nw_x] != player {
+            nw_vec.push((nw_y, nw_x));
+        } else if board[nw_y][nw_x] == player {
+            for i in &nw_vec {
+                if player == BLACK {
+                    board[i.0][i.1] = BLACK;
+                } else if player == WHITE {
+                    board[i.0][i.1] = WHITE;
+                }
+            }
+        }
     }
 }
 
