@@ -80,6 +80,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -103,6 +104,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -125,6 +127,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -148,6 +151,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -170,6 +174,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -193,6 +198,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -215,6 +221,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 
@@ -238,6 +245,7 @@ fn update_board(
                     board[i.0][i.1] = WHITE;
                 }
             }
+            break;
         }
     }
 }
@@ -403,6 +411,29 @@ fn check_can_put(
     return Err("そこにはおけないよ".to_string());
 }
 
+fn check_win(board: &[[char; BOARD_WIDTH]; BOARD_HEIGHT]) {
+    let mut black = 0;
+    let mut white = 0;
+    for i in 1..=8 {
+        for j in 1..=8 {
+            if board[i][j] == '-' {
+                return;
+            } else if board[i][j] == 'x' {
+                black += 1;
+            } else if board[i][j] == 'o' {
+                white += 1;
+            }
+        }
+    }
+
+    if black > white {
+        println!("black win!!");
+    } else if white > black {
+        println!("white win!!");
+    } else {
+        println!("draw...");
+    }
+}
 fn main() {
     let mut turn = 1;
 
@@ -421,6 +452,7 @@ fn main() {
             match check_can_put(&board, BLACK, &y, &x) {
                 Ok(()) => {
                     update_board(&mut board, BLACK, &y, &x);
+                    check_win(&board);
                     turn += 1;
                 }
                 Err(e) => {
@@ -440,6 +472,7 @@ fn main() {
             match check_can_put(&board, WHITE, &y, &x) {
                 Ok(()) => {
                     update_board(&mut board, WHITE, &y, &x);
+                    check_win(&board);
                     turn += 1;
                 }
                 Err(e) => {
@@ -451,9 +484,5 @@ fn main() {
         }
 
         println!();
-
-        if turn == 10 {
-            break;
-        }
     }
 }
